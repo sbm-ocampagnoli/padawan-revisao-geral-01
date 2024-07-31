@@ -2,6 +2,7 @@ package br.com.backend.model;
 
 import java.time.LocalDateTime;
 
+import br.com.backend.controller.form.RecipeForm;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +38,27 @@ public class Recipe {
 	@PreUpdate
 	protected void onUpdate() {
 		updatedAt = LocalDateTime.now();
+	}
+
+	public Recipe() {
+	}
+
+	public Recipe(String name, String description, String instructions, LocalDateTime createdAt,
+			LocalDateTime updatedAt) {
+		this.name = name;
+		this.description = description;
+		this.instructions = instructions;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
+	
+	public Recipe(Recipe recipe) {
+		this.id = recipe.getId();
+		this.name = recipe.getName();
+		this.description = recipe.getDescription();
+		this.instructions = recipe.getDescription();
+		this.createdAt = recipe.getCreatedAt();
+		this.updatedAt = recipe.updatedAt;
 	}
 
 	public Long getId() {
