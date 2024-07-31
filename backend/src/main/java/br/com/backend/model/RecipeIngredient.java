@@ -55,7 +55,4 @@ public class RecipeIngredient {
 	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
-
-	
-
 }
