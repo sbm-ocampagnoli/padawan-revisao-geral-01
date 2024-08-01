@@ -32,7 +32,8 @@ public class RecipeController {
 	@GetMapping
 	public List<RecipeDto> list() {
 		List<Recipe> recipes = this.service.list();
-		return RecipeDto.convert(recipes);
+		List<RecipeDto> convertRecipe = RecipeDto.convert(recipes);
+		return  convertRecipe;
 	}
 
 	@PostMapping
