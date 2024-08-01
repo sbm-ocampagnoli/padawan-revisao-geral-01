@@ -7,6 +7,7 @@ import br.com.backend.controller.form.RecipeForm;
 import br.com.backend.model.Recipe;
 
 public class RecipeDto {
+	private Long id;
 	private String name;
 	private String description;
 	private String instructions;
@@ -15,11 +16,12 @@ public class RecipeDto {
 	}
 
 	public RecipeDto(Recipe recipe) {
+		this.id = recipe.getId();
 		this.name = recipe.getName();
 		this.description = recipe.getDescription();
 		this.instructions = recipe.getInstructions();
 	}
-	
+
 	public RecipeDto(RecipeForm form) {
 		this.name = form.getName();
 		this.description = form.getDescription();
@@ -49,9 +51,17 @@ public class RecipeDto {
 	public void setInstructions(String instructions) {
 		this.instructions = instructions;
 	}
-	
+
 	public static List<RecipeDto> convert(List<Recipe> recipes) {
 		return recipes.stream().map(RecipeDto::new).collect(Collectors.toList());
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
