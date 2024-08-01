@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,10 +48,16 @@ public class RecipeController {
 
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<RecipeDto> atualizar(@PathVariable Long id, @RequestBody @Valid RecipeForm form) {
+	public ResponseEntity<RecipeDto> update(@PathVariable Long id, @RequestBody @Valid RecipeForm form) {
 		Recipe recipe = service.update(id, form);
 		return ResponseEntity.ok((new RecipeDto(recipe)));
 	}
 	
+	@DeleteMapping("/{id}")
+	@Transactional
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+		service.delete(id);
+		return ResponseEntity.ok().build();
+	}
 	
 }

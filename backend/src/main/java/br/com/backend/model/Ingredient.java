@@ -23,9 +23,6 @@ public class Ingredient {
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 
-	@OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<RecipeIngredient> recipeIngredients;
-	
 	@PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -67,14 +64,6 @@ public class Ingredient {
 
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-
-	public List<RecipeIngredient> getRecipeIngredients() {
-		return recipeIngredients;
-	}
-
-	public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
-		this.recipeIngredients = recipeIngredients;
 	}
 
 }

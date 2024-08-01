@@ -33,4 +33,8 @@ public class RecipeService {
 		recipe.setUpdatedAt(LocalDateTime.now());
 		return recipe;
 	}
+
+	public void delete(Long id) {
+		this.repository.deleteById(id);
+	}
 }
