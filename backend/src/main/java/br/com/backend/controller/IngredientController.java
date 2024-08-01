@@ -14,16 +14,14 @@ import br.com.backend.service.IngredientService;
 @RestController
 @RequestMapping("/ingredients")
 public class IngredientController {
-	
-	
+
 	@Autowired
 	private IngredientService service;
-	
+
 	@GetMapping
-	public List<IngredientDto> list () {
+	public List<IngredientDto> list() {
 		List<Ingredient> ingredients = this.service.list();
 		return IngredientDto.convert(ingredients);
 	}
-	
-	
+
 }

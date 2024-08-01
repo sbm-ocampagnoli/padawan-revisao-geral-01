@@ -3,6 +3,7 @@ package br.com.backend.controller.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.com.backend.controller.form.RecipeForm;
 import br.com.backend.model.Recipe;
 
 public class RecipeDto {
@@ -17,6 +18,12 @@ public class RecipeDto {
 		this.name = recipe.getName();
 		this.description = recipe.getDescription();
 		this.instructions = recipe.getInstructions();
+	}
+	
+	public RecipeDto(RecipeForm form) {
+		this.name = form.getName();
+		this.description = form.getDescription();
+		this.instructions = form.getInstructions();
 	}
 
 	public String getName() {
