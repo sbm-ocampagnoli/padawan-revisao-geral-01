@@ -1,31 +1,61 @@
 <div class="container dark-mode">
   <h1 class="text-center my-4">Receitas</h1>
-
-  <!-- Formulário para criar/atualizar receitas -->
+  <input
+    [(ngModel)]="search"
+    (ngModelChange)="loadRecipesByName(search)"
+    class="form-control bg-dark text-white d-none search"
+    placeholder="Search..."
+    required
+  />
   <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="mb-4">
     <div class="form-group">
-      <input formControlName="name" class="form-control bg-dark text-white" placeholder="Nome da Receita" required>
+      <input
+        formControlName="name"
+        class="form-control bg-dark text-white"
+        placeholder="Nome da Receita"
+        required
+      />
     </div>
     <div class="form-group">
-      <input formControlName="description" class="form-control bg-dark text-white" placeholder="Descrição" required>
+      <input
+        formControlName="description"
+        class="form-control bg-dark text-white"
+        placeholder="Descrição"
+        required
+      />
     </div>
     <div class="form-group">
-      <textarea formControlName="instructions" class="form-control bg-dark text-white" placeholder="Instruções" required></textarea>
+      <textarea
+        formControlName="instructions"
+        class="form-control bg-dark text-white"
+        placeholder="Instruções"
+        required
+      ></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">{{ editMode ? 'Atualizar Receita' : 'Adicionar Receita' }}</button>
+    <button type="submit" class="btn btn-primary">
+      {{ editMode ? "Atualizar Receita" : "Adicionar Receita" }}
+    </button>
   </form>
 
-  <!-- Lista de receitas -->
   <ul class="list-group">
-    <li *ngFor="let recipe of recipes" class="list-group-item d-flex justify-content-between align-items-center bg-dark text-white border-light">
+    <li
+      *ngFor="let recipe of recipes"
+      class="list-group-item d-flex justify-content-between align-items-center bg-dark text-white border-light"
+    >
       <div>
-        <strong>{{recipe.name}}</strong>
-        <p class="mb-0">{{recipe.description}}</p>
-        <p class="mb-0"><em>{{recipe.instructions}}</em></p>
+        <strong>{{ recipe.name }}</strong>
+        <p class="mb-0">{{ recipe.description }}</p>
+        <p class="mb-0">
+          <em>{{ recipe.instructions }}</em>
+        </p>
       </div>
       <div>
-        <button class="btn btn-warning btn-sm" (click)="onEdit(recipe)">Editar</button>
-        <button class="btn btn-danger btn-sm" (click)="onDelete(recipe.id)">Deletar</button>
+        <button class="btn btn-warning btn-sm" (click)="onEdit(recipe)">
+          Editar
+        </button>
+        <button class="btn btn-danger btn-sm" (click)="onDelete(recipe.id)">
+          Deletar
+        </button>
       </div>
     </li>
   </ul>

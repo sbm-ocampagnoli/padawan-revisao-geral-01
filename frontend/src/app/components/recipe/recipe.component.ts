@@ -13,12 +13,13 @@ export class RecipeComponent implements OnInit {
   recipeForm: FormGroup;
   editMode = false;
   currentRecipeId: number | null | undefined = null;
+  search?: string;
 
   constructor(private fb: FormBuilder, private recipeService: RecipeService) {
     this.recipeForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      instructions: ['', Validators.required]
+      instructions: ['', Validators.required],
     });
   }
 
@@ -31,9 +32,12 @@ export class RecipeComponent implements OnInit {
     this.loadRecipes();
   }
 
-  loadRecipes(): void {
-    this.recipeService.getRecipes().subscribe((recipes: Recipe[]) => {
-
+  loadRecipesByName(name?: string) {
+      this.recipes = [];
+      this.loadRecipes(name);
+  }
+  loadRecipes(name?: string): void {
+    this.recipeService.getRecipes(name).subscribe((recipes: Recipe[]) => {
       this.recipes = recipes;
     });
   }
