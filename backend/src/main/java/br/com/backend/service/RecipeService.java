@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import br.com.backend.controller.form.RecipeForm;
@@ -18,6 +19,11 @@ public class RecipeService {
 
 	public List<Recipe> list() {
 		return this.repository.findAll();
+	}
+	
+	
+	public List<Recipe> list(String name) {
+		return this.repository.findAllByName(name);
 	}
 
 	public Recipe add(Recipe recipe) {
@@ -36,4 +42,6 @@ public class RecipeService {
 	public void delete(Long id) {
 		this.repository.deleteById(id);
 	}
+
+	
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -30,10 +31,13 @@ public class RecipeController {
 	RecipeService service;
 
 	@GetMapping
-	public List<RecipeDto> list() {
-		List<Recipe> recipes = this.service.list();
-		List<RecipeDto> convertRecipe = RecipeDto.convert(recipes);
-		return  convertRecipe;
+	public List<RecipeDto> list(@RequestParam(required = false) String name) {
+		if (name == null) {
+			List<Recipe> recipes = this.service.list();
+			return RecipeDto.convert(recipes);
+		}
+		List<Recipe> recipes = this.service.list(name);
+		return RecipeDto.convert(recipes);
 	}
 
 	@PostMapping
@@ -53,12 +57,12 @@ public class RecipeController {
 		Recipe recipe = service.update(id, form);
 		return ResponseEntity.ok((new RecipeDto(recipe)));
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.ok().build();
 	}
-	
+
 }
